@@ -1,0 +1,43 @@
+# --- Segredos ---
+.env
+*.env
+!.env.example
+kubeconfig*
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# --- Dados (chegam pelo pipeline, não pelo Git) ---
+data/landing/*
+!data/landing/.gitkeep
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+
+# --- Meltano ---
+.meltano/
+meltano/output/
+
+# --- dbt ---
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# --- Airflow ---
+logs/
+
+# --- Power BI (projeto .pbip) ---
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf
+
+# --- SO / IDE ---
+.DS_Store
+Thumbs.db
+.vscode/

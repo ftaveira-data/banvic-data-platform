@@ -1,3 +1,4 @@
 # Copie para terraform.tfvars e preencha. O terraform.tfvars NAO vai para o Git.
 minio_root_user     = "banvic-admin"
 minio_root_password = "troque-por-uma-senha-forte"
+minio_pipeline_password = "troque-por-outra-senha-forte"

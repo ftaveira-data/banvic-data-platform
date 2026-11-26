@@ -1,0 +1,30 @@
+# Cluster local do BanVic Data Platform
+# Uso: kind create cluster --config infra/kind/kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: banvic
+
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.37.0   # versão fixada: reprodutibilidade
+    extraPortMappings:
+      # Postgres (data warehouse) -> Power BI / DBeaver
+      - containerPort: 30432
+        hostPort: 5432
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+      # Airflow Web UI
+      - containerPort: 30080
+        hostPort: 8080
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+      # MinIO API (S3) -> script entrega_erp
+      - containerPort: 30900
+        hostPort: 9000
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+      # MinIO Console
+      - containerPort: 30901
+        hostPort: 9001
+        listenAddress: "127.0.0.1"
+        protocol: TCP  

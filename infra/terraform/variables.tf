@@ -25,3 +25,25 @@ variable "minio_pipeline_password" {
     error_message = "A senha do pipeline-svc precisa ter pelo menos 8 caracteres."
   }
 }
+
+variable "warehouse_db_password" {
+  description = "Senha do usuario banvic_admin no warehouse."
+  type        = string
+  sensitive   = true
+
+  validation {
+    condition     = length(var.warehouse_db_password) >= 12
+    error_message = "A senha do warehouse precisa ter pelo menos 12 caracteres."
+  }
+}
+
+variable "airflow_db_password" {
+  description = "Senha do usuario airflow no metadata DB."
+  type        = string
+  sensitive   = true
+
+  validation {
+    condition     = length(var.airflow_db_password) >= 12
+    error_message = "A senha do metadata DB precisa ter pelo menos 12 caracteres."
+  }
+}

@@ -10,5 +10,9 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 3.2"
     }
+    minio = {
+      source  = "aminueza/minio"
+      version = "~> 3.38"
+    }
   }
 }

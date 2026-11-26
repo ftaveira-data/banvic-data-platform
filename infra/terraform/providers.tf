@@ -14,3 +14,11 @@ provider "helm" {
     config_context = local.kube_context
   }
 }
+
+provider "minio" {
+  minio_server   = "localhost:9000"
+  minio_user     = var.minio_root_user
+  minio_password = var.minio_root_password
+  minio_ssl      = false
+}
+

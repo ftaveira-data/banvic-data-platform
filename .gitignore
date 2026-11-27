@@ -41,3 +41,6 @@ powerbi/**/.pbi/cache.abf
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Arquivos de referencia de charts (consulta local)
+*-chart-defaults.yaml

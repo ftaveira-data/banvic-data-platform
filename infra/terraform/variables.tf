@@ -47,3 +47,14 @@ variable "airflow_db_password" {
     error_message = "A senha do metadata DB precisa ter pelo menos 12 caracteres."
   }
 }
+
+variable "airflow_admin_password" {
+  description = "Senha do usuario admin da interface do Airflow."
+  type        = string
+  sensitive   = true
+
+  validation {
+    condition     = length(var.airflow_admin_password) >= 12
+    error_message = "A senha do admin do Airflow precisa ter pelo menos 12 caracteres."
+  }
+}

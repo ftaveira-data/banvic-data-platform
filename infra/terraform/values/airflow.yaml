@@ -1,0 +1,54 @@
+# Chart oficial apache-airflow/airflow 1.22.0 (Airflow 3.2.2)
+# Nenhum segredo aqui: eles vem de Kubernetes Secrets criados pelo Terraform.
+
+executor: KubernetesExecutor
+
+# Componentes que o KubernetesExecutor nao usa
+redis:
+  enabled: false
+statsd:
+  enabled: false
+pgbouncer:
+  enabled: false
+
+# Metadata DB: usamos o nosso Postgres (modulo airflow-metadb).
+# O subchart do chart usa imagens bitnamilegacy, sem atualizacoes.
+postgresql:
+  enabled: false
+data:
+  metadataSecretName: banvic-airflow-metadata
+
+fernetKeySecretName: banvic-airflow-fernet
+apiSecretKeySecretName: banvic-airflow-api-secret
+jwtSecretName: banvic-airflow-jwt
+
+# O Terraform espera os recursos ficarem prontos. Com hooks do Helm, os jobs
+# de migracao so rodariam depois dessa espera, causando um impasse.
+migrateDatabaseJob:
+  useHelmHooks: false
+createUserJob:
+  useHelmHooks: false
+  defaultUser:
+    username: admin
+    email: admin@banvic.local
+    firstName: Admin
+    lastName: BanVic
+    # password: definida pelo Terraform (set_sensitive)
+
+# Interface exposta em localhost:8080 (NodePort 30080 + kind-config)
+apiServer:
+  service:
+    type: NodePort
+    ports:
+      - name: api-server
+        port: 8080
+        nodePort: 30080
+
+# O padrao e 100Gi; para uso local, 1Gi basta
+triggerer:
+  persistence:
+    size: 1Gi
+
+config:
+  core:
+    load_examples: "False"

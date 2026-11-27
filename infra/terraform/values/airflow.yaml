@@ -52,6 +52,15 @@ triggerer:
 config:
   core:
     load_examples: "False"
+  # Detecta DAGs novas em 30s (o padrao e 300s)
+  dag_processor:
+    refresh_interval: 30
+  # Logs das tasks gravados no MinIO: sobrevivem ao fim do pod
+  logging:
+    remote_logging: "True"
+    remote_base_log_folder: "s3://airflow-logs"
+    remote_log_conn_id: "minio_default"
+    encrypt_s3_logs: "False"
 
 # DAGs vindas do GitHub (repositorio publico: sem credenciais)
 # A branch e definida pelo Terraform (variavel airflow_dags_branch)

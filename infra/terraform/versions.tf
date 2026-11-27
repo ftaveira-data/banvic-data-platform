@@ -14,5 +14,10 @@ terraform {
       source  = "aminueza/minio"
       version = "~> 3.38"
     }
+
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6"
+    }
   }
 }

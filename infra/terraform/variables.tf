@@ -58,3 +58,9 @@ variable "airflow_admin_password" {
     error_message = "A senha do admin do Airflow precisa ter pelo menos 12 caracteres."
   }
 }
+
+variable "airflow_dags_branch" {
+  description = "Branch do GitHub que o git-sync usa para buscar as DAGs. Padrao: main."
+  type        = string
+  default     = "main"
+}

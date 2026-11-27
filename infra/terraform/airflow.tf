@@ -87,6 +87,13 @@ resource "helm_release" "airflow" {
 
   values = [file("${path.module}/values/airflow.yaml")]
 
+    set = [
+    {
+      name  = "dags.gitSync.branch"
+      value = var.airflow_dags_branch
+    },
+  ]
+
   set_sensitive = [
     {
       name  = "createUserJob.defaultUser.password"

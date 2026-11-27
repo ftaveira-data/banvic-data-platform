@@ -52,3 +52,12 @@ triggerer:
 config:
   core:
     load_examples: "False"
+
+# DAGs vindas do GitHub (repositorio publico: sem credenciais)
+# A branch e definida pelo Terraform (variavel airflow_dags_branch)
+dags:
+  gitSync:
+    enabled: true
+    repo: https://github.com/ftaveira-data/banvic-data-platform.git
+    subPath: dags
+    period: 30s

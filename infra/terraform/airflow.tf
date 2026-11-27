@@ -111,5 +111,28 @@ resource "helm_release" "airflow" {
     kubernetes_secret_v1.airflow_fernet,
     kubernetes_secret_v1.airflow_api_secret,
     kubernetes_secret_v1.airflow_jwt,
+    kubernetes_secret_v1.airflow_conn_minio,
   ]
+}
+
+  # Connection do Airflow com o MinIO, entregue como variavel de ambiente
+# AIRFLOW_CONN_MINIO_DEFAULT (o Airflow le qualquer AIRFLOW_CONN_<ID>)
+resource "kubernetes_secret_v1" "airflow_conn_minio" {
+  metadata {
+    name      = "banvic-airflow-conn-minio"
+    namespace = local.airflow_namespace
+    labels    = local.airflow_labels
+  }
+
+  data = {
+    AIRFLOW_CONN_MINIO_DEFAULT = jsonencode({
+      conn_type = "aws"
+      login     = minio_iam_user.pipeline.name
+      password  = var.minio_pipeline_password
+      extra = {
+        endpoint_url = "http://minio.storage.svc.cluster.local:9000"
+        region_name  = "us-east-1"
+      }
+    })
+  }
 }

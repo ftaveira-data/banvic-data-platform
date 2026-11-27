@@ -1,0 +1,12 @@
+# Padrão: texto com final de linha LF (Linux), em qualquer sistema
+* text=auto eol=lf
+
+# Scripts do PowerShell rodam no Windows: mantém CRLF
+*.ps1 text eol=crlf
+
+# Binários: o Git não deve mexer
+*.zip  binary
+*.pbix binary
+*.png  binary
+*.jpg  binary
+*.pdf  binary

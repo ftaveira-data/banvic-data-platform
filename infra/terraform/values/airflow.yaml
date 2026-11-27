@@ -61,3 +61,10 @@ dags:
     repo: https://github.com/ftaveira-data/banvic-data-platform.git
     subPath: dags
     period: 30s
+
+# Variaveis de ambiente vindas de Secrets, em todos os componentes do Airflow
+# (inclusive os pods de task do KubernetesExecutor)
+secret:
+  - envName: AIRFLOW_CONN_MINIO_DEFAULT
+    secretName: banvic-airflow-conn-minio
+    secretKey: AIRFLOW_CONN_MINIO_DEFAULT    

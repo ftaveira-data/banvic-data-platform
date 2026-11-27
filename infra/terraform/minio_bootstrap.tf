@@ -1,6 +1,6 @@
 locals {
   # landing: onde o "ERP" entrega o zip | raw: CSVs extraidos, organizados por data
-  minio_buckets = toset(["landing", "raw"])
+  minio_buckets = toset(["landing", "raw", "airflow-logs"])
 }
 
 resource "minio_s3_bucket" "this" {
